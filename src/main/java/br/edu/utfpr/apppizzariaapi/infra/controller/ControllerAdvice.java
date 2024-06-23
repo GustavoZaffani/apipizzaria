@@ -4,7 +4,6 @@ import br.edu.utfpr.apppizzariaapi.infra.controller.responses.ErrorData;
 import br.edu.utfpr.apppizzariaapi.infra.controller.responses.ErrorField;
 import br.edu.utfpr.apppizzariaapi.infra.exceptions.RegisterNotFoundException;
 import br.edu.utfpr.apppizzariaapi.infra.translation.TranslationService;
-import jakarta.persistence.EntityNotFoundException;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
