@@ -1,6 +1,7 @@
 package br.edu.utfpr.apppizzariaapi.domain.sale.entities;
 
 import br.edu.utfpr.apppizzariaapi.domain.pizza.entities.Pizza;
+import br.edu.utfpr.apppizzariaapi.infra.cache.AuthenticationContext;
 import jakarta.persistence.*;
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
@@ -19,6 +20,8 @@ public class SaleItem {
     @GeneratedValue(generator = "UUID")
     private UUID id;
 
+    private UUID pizzeriaId;
+
     @ManyToOne(fetch = FetchType.LAZY)
     private Sale sale;
 
@@ -28,6 +31,7 @@ public class SaleItem {
     private Long quantity;
 
     public SaleItem(Sale sale, Pizza pizza, Long quantity) {
+        this.pizzeriaId = AuthenticationContext.getPizzeriaId();
         this.sale = sale;
         this.pizza = pizza;
         this.quantity = quantity;

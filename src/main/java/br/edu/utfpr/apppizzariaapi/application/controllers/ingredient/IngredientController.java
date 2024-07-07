@@ -31,7 +31,7 @@ public class IngredientController {
     }
 
     @GetMapping
-    public ResponseEntity<List<IngredientDefaultResponse>> findAll(@RequestHeader("PizzeriaId") String token) {
+    public ResponseEntity<List<IngredientDefaultResponse>> findAll() {
         return ResponseEntity.ok(ingredientList.list());
     }
 
@@ -45,10 +45,4 @@ public class IngredientController {
                                                             @Valid @RequestBody IngredientUpdateRequest request) {
         return ResponseEntity.ok(ingredientUpdate.update(id, request));
     }
-
-//    @DeleteMapping("/{id}")
-//    public ResponseEntity<Void> delete(@PathVariable UUID id) {
-//        pizzeriaDelete.delete(id);
-//        return ResponseEntity.noContent().build();
-//    }
 }

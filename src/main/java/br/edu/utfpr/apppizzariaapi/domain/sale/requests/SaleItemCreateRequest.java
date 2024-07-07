@@ -8,9 +8,10 @@ import java.util.UUID;
 
 @Builder
 public record SaleItemCreateRequest(
-        @NotNull
+        @NotNull(message = "{sale-register.sale-items-pizza-id-is-null}")
         UUID pizzaId,
-        @Positive
+        @NotNull(message = "{sale-register.sale-items-quantity-is-null}")
+        @Positive(message = "{sale-register.sale-items-quantity-is-positive}")
         Long quantity
 ) {
 }

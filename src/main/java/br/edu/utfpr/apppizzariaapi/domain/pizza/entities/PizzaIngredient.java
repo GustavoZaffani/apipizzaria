@@ -2,6 +2,7 @@ package br.edu.utfpr.apppizzariaapi.domain.pizza.entities;
 
 import br.edu.utfpr.apppizzariaapi.domain.ingredient.entities.Ingredient;
 import br.edu.utfpr.apppizzariaapi.domain.pizza.requests.PizzaIngredientCreateRequest;
+import br.edu.utfpr.apppizzariaapi.infra.cache.AuthenticationContext;
 import jakarta.persistence.*;
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
@@ -21,6 +22,8 @@ public class PizzaIngredient {
     @GeneratedValue(generator = "UUID")
     private UUID id;
 
+    private UUID pizzeriaId;
+
     @ManyToOne(fetch = FetchType.LAZY)
     private Pizza pizza;
 
@@ -30,6 +33,7 @@ public class PizzaIngredient {
     private BigDecimal quantity;
 
     public PizzaIngredient(Pizza pizza, PizzaIngredientCreateRequest request) {
+        this.pizzeriaId = AuthenticationContext.getPizzeriaId();
         this.ingredient = new Ingredient(request.ingredientId());
         this.pizza = pizza;
         this.quantity = request.quantity();

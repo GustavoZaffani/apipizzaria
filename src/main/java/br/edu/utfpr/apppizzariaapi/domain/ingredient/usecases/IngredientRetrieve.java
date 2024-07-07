@@ -2,7 +2,7 @@ package br.edu.utfpr.apppizzariaapi.domain.ingredient.usecases;
 
 import br.edu.utfpr.apppizzariaapi.domain.ingredient.responses.IngredientDefaultResponse;
 import br.edu.utfpr.apppizzariaapi.infra.exceptions.RegisterNotFoundException;
-import br.edu.utfpr.apppizzariaapi.infra.pizzeria.repositories.IngredientRepository;
+import br.edu.utfpr.apppizzariaapi.infra.ingredient.repositories.IngredientRepository;
 import br.edu.utfpr.apppizzariaapi.infra.translation.TranslationService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
@@ -10,7 +10,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import java.util.UUID;
 
-import static br.edu.utfpr.apppizzariaapi.domain.ingredient.constants.TranslationConstants.INGREDIENT_NOT_FOUND;
+import static br.edu.utfpr.apppizzariaapi.infra.translation.constants.TranslationConstants.INGREDIENT_NOT_FOUND;
 
 @Service
 @RequiredArgsConstructor

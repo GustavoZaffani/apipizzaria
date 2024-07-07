@@ -4,10 +4,7 @@ import br.edu.utfpr.apppizzariaapi.domain.ingredient.responses.IngredientDefault
 import br.edu.utfpr.apppizzariaapi.domain.pizza.requests.PizzaCreateRequest;
 import br.edu.utfpr.apppizzariaapi.domain.pizza.requests.PizzaUpdateRequest;
 import br.edu.utfpr.apppizzariaapi.domain.pizza.responses.PizzaDefaultResponse;
-import br.edu.utfpr.apppizzariaapi.domain.pizza.usecases.PizzaCreate;
-import br.edu.utfpr.apppizzariaapi.domain.pizza.usecases.PizzaList;
-import br.edu.utfpr.apppizzariaapi.domain.pizza.usecases.PizzaRetrieve;
-import br.edu.utfpr.apppizzariaapi.domain.pizza.usecases.PizzaUpdate;
+import br.edu.utfpr.apppizzariaapi.domain.pizza.usecases.*;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
@@ -25,6 +22,7 @@ public class PizzaController {
     private final PizzaUpdate pizzaUpdate;
     private final PizzaList pizzaList;
     private final PizzaRetrieve pizzaRetrieve;
+    private final PizzaDelete pizzaDelete;
 
     @PostMapping
     public ResponseEntity<PizzaDefaultResponse> create(@Valid @RequestBody PizzaCreateRequest request) {
@@ -45,6 +43,12 @@ public class PizzaController {
     @GetMapping("/{id}")
     public ResponseEntity<PizzaDefaultResponse> findById(@PathVariable UUID id) {
         return ResponseEntity.ok(pizzaRetrieve.retrieve(id));
+    }
+
+    @DeleteMapping("/{id}")
+    public ResponseEntity<Void> delete(@PathVariable UUID id) {
+        pizzaDelete.delete(id);
+        return ResponseEntity.noContent().build();
     }
 
 }

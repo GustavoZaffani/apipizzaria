@@ -1,7 +1,8 @@
 package br.edu.utfpr.apppizzariaapi.domain.ingredient.usecases;
 
 import br.edu.utfpr.apppizzariaapi.domain.ingredient.responses.IngredientDefaultResponse;
-import br.edu.utfpr.apppizzariaapi.infra.pizzeria.repositories.IngredientRepository;
+import br.edu.utfpr.apppizzariaapi.infra.cache.AuthenticationContext;
+import br.edu.utfpr.apppizzariaapi.infra.ingredient.repositories.IngredientRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -16,6 +17,8 @@ public class IngredientList {
     private final IngredientRepository ingredientRepository;
 
     public List<IngredientDefaultResponse> list() {
-        return IngredientDefaultResponse.fromEntities(ingredientRepository.findAll());
+        return IngredientDefaultResponse.fromEntities(ingredientRepository.findAllByPizzeriaId(
+                AuthenticationContext.getPizzeriaId()
+        ));
     }
 }

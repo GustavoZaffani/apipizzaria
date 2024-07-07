@@ -1,6 +1,5 @@
 package br.edu.utfpr.apppizzariaapi.domain.sale.responses;
 
-import br.edu.utfpr.apppizzariaapi.domain.pizza.responses.PizzaIngredientDefaultResponse;
 import br.edu.utfpr.apppizzariaapi.domain.sale.entities.Sale;
 import lombok.Builder;
 
@@ -12,7 +11,6 @@ import java.util.UUID;
 @Builder
 public record SaleDefaultResponse(
         UUID id,
-        UUID pizzeriaId,
         List<SaleItemDefaultResponse> saleItems,
         LocalDateTime saleDate,
         BigDecimal total
@@ -27,7 +25,6 @@ public record SaleDefaultResponse(
     public static SaleDefaultResponse fromEntity(Sale sale) {
         return SaleDefaultResponse.builder()
                 .id(sale.getId())
-                .pizzeriaId(sale.getPizzeria().getId())
                 .saleItems(SaleItemDefaultResponse.fromEntities(sale.getSaleItems()))
                 .saleDate(sale.getSaleDate())
                 .total(sale.getTotal())

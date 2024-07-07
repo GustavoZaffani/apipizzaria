@@ -2,7 +2,9 @@ package br.edu.utfpr.apppizzariaapi.domain.sale.entities;
 
 import br.edu.utfpr.apppizzariaapi.domain.pizza.entities.Pizza;
 import br.edu.utfpr.apppizzariaapi.domain.pizzeria.entities.Pizzeria;
+import br.edu.utfpr.apppizzariaapi.domain.sale.requests.SaleCreateRequest;
 import br.edu.utfpr.apppizzariaapi.domain.sale.requests.SaleItemCreateRequest;
+import br.edu.utfpr.apppizzariaapi.infra.cache.AuthenticationContext;
 import jakarta.persistence.*;
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
@@ -25,8 +27,7 @@ public class Sale {
     @GeneratedValue(generator = "UUID")
     private UUID id;
 
-    @ManyToOne(fetch = FetchType.LAZY)
-    private Pizzeria pizzeria;
+    private UUID pizzeriaId;
 
     @OneToMany(mappedBy = "sale", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
     private List<SaleItem> saleItems;
@@ -35,10 +36,10 @@ public class Sale {
 
     private BigDecimal total = BigDecimal.ZERO;
 
-    public Sale(Pizzeria pizzeria, List<SaleItemCreateRequest> saleItemCreateRequests, Map<UUID, Pizza> pizzaMap) {
-        this.pizzeria = pizzeria;
+    public Sale(SaleCreateRequest saleCreateRequest, Map<UUID, Pizza> pizzaMap) {
+        this.pizzeriaId = AuthenticationContext.getPizzeriaId();
         this.saleDate = LocalDateTime.now();
-        this.saleItems = saleItemCreateRequests.stream()
+        this.saleItems = saleCreateRequest.saleItems().stream()
                 .map(saleItem -> {
                     Pizza pizza = pizzaMap.get(saleItem.pizzaId());
                     this.total = this.total.add(pizza.getPrice().multiply(BigDecimal.valueOf(saleItem.quantity())));

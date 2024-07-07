@@ -18,7 +18,6 @@ import static io.micrometer.common.util.StringUtils.isNotBlank;
 @Table(name = "pizzeria")
 @EqualsAndHashCode(of = "id")
 @NoArgsConstructor
-@Where(clause = "active = true")
 public class Pizzeria {
 
     @Id
@@ -38,10 +37,6 @@ public class Pizzeria {
 
     private String password;
 
-    private boolean active;
-
-    private LocalDateTime deletedAt;
-
     public Pizzeria(PizzeriaCreateRequest request) {
         this.name = request.name();
         this.address = new Address(request.address());
@@ -49,7 +44,6 @@ public class Pizzeria {
         this.email = request.email();
         this.login = request.login();
         this.password = request.password();
-        this.active = true;
     }
 
     public void update(PizzeriaUpdateRequest request) {

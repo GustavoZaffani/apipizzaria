@@ -8,9 +8,9 @@ import java.math.BigDecimal;
 
 @Builder
 public record PizzaUpdateRequest(
-        @Length(max = 255)
+        @Length(max = 255, message = "{pizza-register.name-is-max-length}")
         String name,
-        @Positive
+        @Positive(message = "{pizza-register.price-is-positive}")
         BigDecimal price
 ) {
 }

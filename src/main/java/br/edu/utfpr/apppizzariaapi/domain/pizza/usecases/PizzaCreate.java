@@ -5,14 +5,18 @@ import br.edu.utfpr.apppizzariaapi.domain.pizza.entities.Pizza;
 import br.edu.utfpr.apppizzariaapi.domain.pizza.requests.PizzaCreateRequest;
 import br.edu.utfpr.apppizzariaapi.domain.pizza.requests.PizzaIngredientCreateRequest;
 import br.edu.utfpr.apppizzariaapi.domain.pizza.responses.PizzaDefaultResponse;
-import br.edu.utfpr.apppizzariaapi.infra.pizzeria.repositories.IngredientRepository;
-import br.edu.utfpr.apppizzariaapi.infra.pizzeria.repositories.PizzaRepository;
+import br.edu.utfpr.apppizzariaapi.infra.exceptions.BadRequestException;
+import br.edu.utfpr.apppizzariaapi.infra.ingredient.repositories.IngredientRepository;
+import br.edu.utfpr.apppizzariaapi.infra.pizza.repositories.PizzaRepository;
+import br.edu.utfpr.apppizzariaapi.infra.translation.TranslationService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 import java.util.UUID;
+
+import static br.edu.utfpr.apppizzariaapi.infra.translation.constants.TranslationConstants.PIZZA_INGREDIENTS_NOT_FOUND;
 
 @Service
 @RequiredArgsConstructor
@@ -21,6 +25,7 @@ public class PizzaCreate {
 
     private final PizzaRepository pizzaRepository;
     private final IngredientRepository ingredientRepository;
+    private final TranslationService translationService;
 
     public PizzaDefaultResponse create(PizzaCreateRequest request) {
         validateIngredients(request.ingredients());
@@ -35,7 +40,7 @@ public class PizzaCreate {
         List<Ingredient> ingredients = ingredientRepository.findAllById(ingredientsIds);
 
         if (ingredients.size() != ingredientsIds.size()) {
-            throw new RuntimeException("Ingredient not found");
+            throw new BadRequestException(translationService.getMessage(PIZZA_INGREDIENTS_NOT_FOUND));
         }
 
     }

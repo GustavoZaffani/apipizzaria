@@ -1,7 +1,7 @@
 CREATE TABLE IF NOT EXISTS sale
 (
     id              UUID                PRIMARY KEY,
-    pizzeria_id     UUID                NOT NULL REFERENCES pizzeria(id),
+    pizzeria_id     UUID                NOT NULL,
     sale_date       TIMESTAMP           NOT NULL,
     total           NUMERIC(15, 2)      NOT NULL
 );

@@ -3,6 +3,7 @@ package br.edu.utfpr.apppizzariaapi.domain.ingredient.entities;
 import br.edu.utfpr.apppizzariaapi.domain.ingredient.enumerations.MeasurementUnit;
 import br.edu.utfpr.apppizzariaapi.domain.ingredient.requests.IngredientCreateRequest;
 import br.edu.utfpr.apppizzariaapi.domain.ingredient.requests.IngredientUpdateRequest;
+import br.edu.utfpr.apppizzariaapi.infra.cache.AuthenticationContext;
 import io.micrometer.common.util.StringUtils;
 import jakarta.persistence.*;
 import lombok.EqualsAndHashCode;
@@ -27,6 +28,8 @@ public class Ingredient {
     @GeneratedValue(generator = "UUID")
     private UUID id;
 
+    private UUID pizzeriaId;
+
     private String name;
 
     private String description;
@@ -40,6 +43,7 @@ public class Ingredient {
 
     public Ingredient(IngredientCreateRequest request) {
         this.name = request.name();
+        this.pizzeriaId = AuthenticationContext.getPizzeriaId();
         this.description = request.description();
         this.price = request.price();
         this.measurementUnit = request.measurementUnit();

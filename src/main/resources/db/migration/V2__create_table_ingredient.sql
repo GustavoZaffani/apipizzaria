@@ -1,6 +1,7 @@
 CREATE TABLE IF NOT EXISTS ingredient
 (
     id               UUID                       PRIMARY KEY,
+    pizzeria_id      UUID                       NOT NULL,
     name             VARCHAR(255)               NOT NULL,
     description      TEXT                       NOT NULL,
     price            NUMERIC(15, 2)             NOT NULL,
@@ -11,6 +12,7 @@ CREATE TABLE IF NOT EXISTS ingredient
 COMMENT ON TABLE ingredient IS 'Tabela que armazena os ingredientes.';
 
 COMMENT ON COLUMN ingredient.id IS 'Identificador único do ingrediente.';
+COMMENT ON COLUMN ingredient.pizzeria_id IS 'Identificador da pizzaria associada ao ingrediente.';
 COMMENT ON COLUMN ingredient.name IS 'Nome do ingrediente.';
 COMMENT ON COLUMN ingredient.description IS 'Descrição do ingrediente.';
 COMMENT ON COLUMN ingredient.price IS 'Preço do ingrediente.';

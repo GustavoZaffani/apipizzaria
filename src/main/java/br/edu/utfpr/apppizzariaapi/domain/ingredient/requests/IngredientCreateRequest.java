@@ -9,16 +9,16 @@ import jakarta.validation.constraints.PositiveOrZero;
 import java.math.BigDecimal;
 
 public record IngredientCreateRequest(
-        @NotBlank
+        @NotBlank(message = "{ingredient-register.name-is-blank}")
         String name,
-        @NotBlank
+        @NotBlank(message = "{ingredient-register.description-is-blank}")
         String description,
-        @NotNull
-        @Positive
+        @NotNull(message = "{ingredient-register.price-is-null}")
+        @Positive(message = "{ingredient-register.price-is-positive}")
         BigDecimal price,
-        @NotNull
+        @NotNull(message = "{ingredient-register.measurement-unit-is-null}")
         MeasurementUnit measurementUnit,
-        @PositiveOrZero
+        @Positive(message = "{ingredient-register.quantity-is-null}")
         BigDecimal quantity
 ) {
 }

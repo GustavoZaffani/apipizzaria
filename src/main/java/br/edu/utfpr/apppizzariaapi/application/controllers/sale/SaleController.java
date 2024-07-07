@@ -10,7 +10,6 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
-import java.util.UUID;
 
 @RestController
 @RequiredArgsConstructor
@@ -26,7 +25,7 @@ public class SaleController {
     }
 
     @GetMapping
-    public ResponseEntity<List<SaleDefaultResponse>> findAll(@RequestHeader("PizzeriaId") UUID pizzeriaId) {
-        return ResponseEntity.ok(saleList.list(pizzeriaId));
+    public ResponseEntity<List<SaleDefaultResponse>> findAll() {
+        return ResponseEntity.ok(saleList.list());
     }
 }

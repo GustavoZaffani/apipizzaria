@@ -7,7 +7,7 @@ import java.math.BigDecimal;
 public record IngredientUpdateRequest(
         String name,
         String description,
-        @Positive
+        @Positive(message = "{ingredient-register.price-is-positive}")
         BigDecimal price
 ) {
 }
