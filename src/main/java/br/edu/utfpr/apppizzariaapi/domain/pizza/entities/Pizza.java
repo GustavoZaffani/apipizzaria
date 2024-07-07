@@ -1,7 +1,6 @@
 package br.edu.utfpr.apppizzariaapi.domain.pizza.entities;
 
 import br.edu.utfpr.apppizzariaapi.domain.ingredient.entities.Ingredient;
-import br.edu.utfpr.apppizzariaapi.domain.pizza.enumerations.SizePizza;
 import br.edu.utfpr.apppizzariaapi.domain.pizza.requests.PizzaCreateRequest;
 import br.edu.utfpr.apppizzariaapi.domain.pizza.requests.PizzaUpdateRequest;
 import jakarta.persistence.*;
@@ -30,20 +29,16 @@ public class Pizza {
 
     private BigDecimal price;
 
-    @Enumerated(EnumType.STRING)
-    private SizePizza size;
+    @OneToMany(mappedBy = "pizza", cascade = CascadeType.ALL)
+    private List<PizzaIngredient> ingredients;
 
-    @ManyToMany(fetch = FetchType.LAZY)
-    @JoinTable(name = "pizza_ingredients",
-            joinColumns = @JoinColumn(name = "pizza_id"),
-            inverseJoinColumns = @JoinColumn(name = "ingredient_id"))
-    private List<Ingredient> ingredients;
-
-    public Pizza(PizzaCreateRequest request, List<Ingredient> ingredients) {
+    public Pizza(PizzaCreateRequest request) {
         this.name = request.name();
         this.price = request.price();
-        this.size = request.size();
-        this.ingredients = ingredients;
+        this.ingredients = request.ingredients()
+                .stream()
+                .map(ingredient -> new PizzaIngredient(this, ingredient))
+                .toList();
     }
 
     public void update(PizzaUpdateRequest request) {

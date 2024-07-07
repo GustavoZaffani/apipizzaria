@@ -31,7 +31,7 @@ public class IngredientController {
     }
 
     @GetMapping
-    public ResponseEntity<List<IngredientDefaultResponse>> findAll() {
+    public ResponseEntity<List<IngredientDefaultResponse>> findAll(@RequestHeader("PizzeriaId") String token) {
         return ResponseEntity.ok(ingredientList.list());
     }
 

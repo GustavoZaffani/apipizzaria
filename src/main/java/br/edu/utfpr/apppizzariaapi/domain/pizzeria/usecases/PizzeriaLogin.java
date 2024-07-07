@@ -20,6 +20,6 @@ public class PizzeriaLogin {
             throw new RuntimeException("Invalid password");
         }
 
-        return new PizzeriaLoginResponse(pizzeria.getId());
+        return PizzeriaLoginResponse.fromEntity(pizzeria);
     }
 }

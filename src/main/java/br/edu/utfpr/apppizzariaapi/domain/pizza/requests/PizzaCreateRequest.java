@@ -1,6 +1,5 @@
 package br.edu.utfpr.apppizzariaapi.domain.pizza.requests;
 
-import br.edu.utfpr.apppizzariaapi.domain.pizza.enumerations.SizePizza;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotEmpty;
 import jakarta.validation.constraints.NotNull;
@@ -20,9 +19,7 @@ public record PizzaCreateRequest(
         @NotNull
         @Positive
         BigDecimal price,
-        @NotNull
-        SizePizza size,
         @NotEmpty
-        List<UUID> ingredientsIds
+        List<PizzaIngredientCreateRequest> ingredients
 ) {
 }

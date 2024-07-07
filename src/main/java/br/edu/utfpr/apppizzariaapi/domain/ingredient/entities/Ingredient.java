@@ -8,12 +8,14 @@ import jakarta.persistence.*;
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
+import lombok.Setter;
 
 import java.math.BigDecimal;
 import java.util.UUID;
 
 import static io.micrometer.common.util.StringUtils.isNotBlank;
 
+@Setter
 @Getter
 @Entity
 @Table(name = "ingredient")
@@ -42,6 +44,10 @@ public class Ingredient {
         this.price = request.price();
         this.measurementUnit = request.measurementUnit();
         this.quantity = request.quantity();
+    }
+
+    public Ingredient(UUID ingredientId) {
+        this.id = ingredientId;
     }
 
     public void update(IngredientUpdateRequest request) {
