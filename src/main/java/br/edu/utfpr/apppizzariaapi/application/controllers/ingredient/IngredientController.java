@@ -31,8 +31,8 @@ public class IngredientController {
     }
 
     @GetMapping
-    public ResponseEntity<List<IngredientDefaultResponse>> findAll() {
-        return ResponseEntity.ok(ingredientList.list());
+    public ResponseEntity<List<IngredientDefaultResponse>> findAll(@RequestParam(value = "ingredientName", required = false) String ingredientName) {
+        return ResponseEntity.ok(ingredientList.list(ingredientName));
     }
 
     @GetMapping("/{id}")

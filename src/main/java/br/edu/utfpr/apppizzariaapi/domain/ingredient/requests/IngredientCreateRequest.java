@@ -18,7 +18,8 @@ public record IngredientCreateRequest(
         BigDecimal price,
         @NotNull(message = "{ingredient-register.measurement-unit-is-null}")
         MeasurementUnit measurementUnit,
-        @Positive(message = "{ingredient-register.quantity-is-null}")
+        @NotNull(message = "{ingredient-register.quantity-is-null}")
+        @Positive(message = "{ingredient-register.quantity-is-positive}")
         BigDecimal quantity
 ) {
 }
