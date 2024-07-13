@@ -1,0 +1,12 @@
+version: '3.7'
+services:
+  database:
+    container_name: postgres_pizzeria
+    image: postgres:16.2-alpine
+    environment:
+      POSTGRES_USER: pizzeria_user
+      POSTGRES_PASSWORD: pizzeria_user123
+      POSTGRES_DB: pizzeria
+    ports:
+      - "5437:5432"
+

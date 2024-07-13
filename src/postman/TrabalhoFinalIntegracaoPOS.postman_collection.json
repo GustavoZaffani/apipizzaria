@@ -1,0 +1,546 @@
+{
+	"info": {
+		"_postman_id": "ed3c045c-6089-49aa-b7e7-ebdfb20a8c90",
+		"name": "TrabalhoFinalIntegracaoPOS",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "10615697"
+	},
+	"item": [
+		{
+			"name": "Pizzeria",
+			"item": [
+				{
+					"name": "PizzeriaLogin",
+					"request": {
+						"auth": {
+							"type": "noauth"
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"login\": \"big\",\r\n    \"password\": \"123\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8080/v1/pizzerias/login",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"v1",
+								"pizzerias",
+								"login"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "PizzeriaCreate",
+					"request": {
+						"auth": {
+							"type": "noauth"
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"name\": \"Fornão\",\r\n    \"address\": {\r\n        \"zipCode\": \"85504811\",\r\n        \"street\": \"Rua teste\",\r\n        \"neighborhood\": \"Cadorin\",\r\n        \"city\": \"Pato Branco\",\r\n        \"state\": \"PR\",\r\n        \"complement\": \"Casa\"\r\n    },\r\n    \"phone\": \"46999150308\",\r\n    \"email\": \"admin@gmail.com\",\r\n    \"login\": \"admin\",\r\n    \"password\": \"123456\"\r\n} ",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8080/v1/pizzerias",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"v1",
+								"pizzerias"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Pizza",
+			"item": [
+				{
+					"name": "PizzaList",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"auth": {
+							"type": "noauth"
+						},
+						"method": "GET",
+						"header": [
+							{
+								"key": "PizzeriaId",
+								"value": "{{PizzeriaId}}",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8080/v1/pizzas",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"v1",
+								"pizzas"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "PizzaRetrieve",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"auth": {
+							"type": "noauth"
+						},
+						"method": "GET",
+						"header": [
+							{
+								"key": "PizzeriaId",
+								"value": "{{PizzeriaId}}",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8080/v1/pizzas/3667f860-dc4a-4ff1-8684-4966083972ab",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"v1",
+								"pizzas",
+								"3667f860-dc4a-4ff1-8684-4966083972ab"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "PizzaCreate",
+					"request": {
+						"auth": {
+							"type": "noauth"
+						},
+						"method": "POST",
+						"header": [
+							{
+								"key": "PizzeriaId",
+								"value": "{{PizzeriaId}}",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n   \"name\": \"Portuguesa\",\r\n   \"price\": 150.60,\r\n   \"ingredients\": [\r\n    {\r\n        \"ingredientId\": \"29554bf5-8e6a-4ca7-9417-88385cf3fdd0\",\r\n        \"quantity\": 1\r\n    }\r\n   ]\r\n} ",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8080/v1/pizzas",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"v1",
+								"pizzas"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "PizzaUpdate",
+					"request": {
+						"auth": {
+							"type": "noauth"
+						},
+						"method": "PATCH",
+						"header": [
+							{
+								"key": "PizzeriaId",
+								"value": "{{PizzeriaId}}",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"name\": \"Portuguesa\",\r\n    \"price\": 150.65\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8080/v1/pizzas/e3f92dcc-a403-43eb-ab41-e563ae779d53",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"v1",
+								"pizzas",
+								"e3f92dcc-a403-43eb-ab41-e563ae779d53"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "PizzaDelete",
+					"request": {
+						"auth": {
+							"type": "noauth"
+						},
+						"method": "DELETE",
+						"header": [
+							{
+								"key": "PizzeriaId",
+								"value": "{{PizzeriaId}}",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8080/v1/pizzas/e3f92dcc-a403-43eb-ab41-e563ae779d53",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"v1",
+								"pizzas",
+								"e3f92dcc-a403-43eb-ab41-e563ae779d53"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Ingredient",
+			"item": [
+				{
+					"name": "IngredientList",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"auth": {
+							"type": "noauth"
+						},
+						"method": "GET",
+						"header": [
+							{
+								"key": "PizzeriaId",
+								"value": "{{PizzeriaId}}",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8080/v1/ingredients?ingredientName=ca",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"v1",
+								"ingredients"
+							],
+							"query": [
+								{
+									"key": "ingredientName",
+									"value": "ca"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "IngredientRetrieve",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJBUEkgVm9sbC5tZWQiLCJzdWIiOiJhZG1pbiIsImV4cCI6MTY5ODAxMzc1OX0.xHZNBl52NCPUeYolMjvExVqDCvISmXPmDEsajNKcJWw",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [
+							{
+								"key": "PizzeriaId",
+								"value": "{{PizzeriaId}}",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8080/v1/ingredients/e00e24b5-bd7f-40af-b2cb-eea3d89f6793",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"v1",
+								"ingredients",
+								"e00e24b5-bd7f-40af-b2cb-eea3d89f6793"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "IngredientCreate",
+					"request": {
+						"auth": {
+							"type": "noauth"
+						},
+						"method": "POST",
+						"header": [
+							{
+								"key": "PizzeriaId",
+								"value": "{{PizzeriaId}}",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"name\": \"Alho\",\r\n    \"description\": \"Alho\",\r\n    \"price\": 4.90,\r\n    \"measurementUnit\": \"KG\",\r\n    \"quantity\": 1\r\n} ",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8080/v1/ingredients",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"v1",
+								"ingredients"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "IngredientUpdate",
+					"request": {
+						"auth": {
+							"type": "noauth"
+						},
+						"method": "PATCH",
+						"header": [
+							{
+								"key": "PizzeriaId",
+								"value": "{{PizzeriaId}}",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"name\": \"Calabreza\"\r\n} ",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8080/v1/ingredients/e00e24b5-bd7f-40af-b2cb-eea3d89f6793",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"v1",
+								"ingredients",
+								"e00e24b5-bd7f-40af-b2cb-eea3d89f6793"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Sale",
+			"item": [
+				{
+					"name": "SaleList",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"auth": {
+							"type": "noauth"
+						},
+						"method": "GET",
+						"header": [
+							{
+								"key": "PizzeriaId",
+								"value": "{{PizzeriaId}}",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8080/v1/sales",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"v1",
+								"sales"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "SaleCreate",
+					"request": {
+						"auth": {
+							"type": "noauth"
+						},
+						"method": "POST",
+						"header": [
+							{
+								"key": "PizzeriaId",
+								"value": "{{PizzeriaId}}",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"saleItems\": [\r\n        {\r\n            \"pizzaId\": \"3667f860-dc4a-4ff1-8684-4966083972ab\",\r\n            \"quantity\": 1\r\n        }\r\n    ]\r\n} ",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8080/v1/sales",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"v1",
+								"sales"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		}
+	]
+}
